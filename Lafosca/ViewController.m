@@ -19,14 +19,14 @@
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://lafosca-beach.herokuapp.com/api/v1/users"]];
     
-    NSString *authString = [NSString stringWithFormat:@"&data={\"user\":[{\"username\":velo,\"password\":\"12345\"}]}"];
-    NSData *authData = [authString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    NSString *authString = @"?username=velo&password=12345";
+    NSData *authData = [NSData dataWithBytes:[authString UTF8String] length:[authString length]];
     NSString *authDataLength = [NSString stringWithFormat:@"%li", [authData length]];
     [request setHTTPBody:authData];
     [request setHTTPMethod:@"POST"];
     [request setValue:authDataLength forHTTPHeaderField:@"Content-Length"];
-  //  [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
- //  [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
     //-- Make URL request with server
     NSHTTPURLResponse *response = nil;
