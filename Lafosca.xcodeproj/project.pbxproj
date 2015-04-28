@@ -15,6 +15,7 @@
 		881E6D701AEF741300352906 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 881E6D6E1AEF741300352906 /* LaunchScreen.xib */; };
 		881E6D7C1AEF741400352906 /* LafoscaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 881E6D7B1AEF741400352906 /* LafoscaTests.m */; };
 		881E6D891AEFC34800352906 /* Beach.m in Sources */ = {isa = PBXBuildFile; fileRef = 881E6D881AEFC34800352906 /* Beach.m */; };
+		881E6D8F1AEFE7E900352906 /* BeachTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881E6D8E1AEFE7E900352906 /* BeachTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,8 @@
 		881E6D851AEF77F500352906 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		881E6D871AEFC34800352906 /* Beach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Beach.h; path = ../Beach.h; sourceTree = "<group>"; };
 		881E6D881AEFC34800352906 /* Beach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Beach.m; path = ../Beach.m; sourceTree = "<group>"; };
+		881E6D8D1AEFE7E900352906 /* BeachTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BeachTableViewController.h; path = ../BeachTableViewController.h; sourceTree = "<group>"; };
+		881E6D8E1AEFE7E900352906 /* BeachTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BeachTableViewController.m; path = ../BeachTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,8 @@
 			children = (
 				881E6D871AEFC34800352906 /* Beach.h */,
 				881E6D881AEFC34800352906 /* Beach.m */,
+				881E6D8D1AEFE7E900352906 /* BeachTableViewController.h */,
+				881E6D8E1AEFE7E900352906 /* BeachTableViewController.m */,
 				881E6D631AEF741300352906 /* AppDelegate.h */,
 				881E6D641AEF741300352906 /* AppDelegate.m */,
 				881E6D661AEF741300352906 /* ViewController.h */,
@@ -226,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				881E6D8F1AEFE7E900352906 /* BeachTableViewController.m in Sources */,
 				881E6D681AEF741300352906 /* ViewController.m in Sources */,
 				881E6D891AEFC34800352906 /* Beach.m in Sources */,
 				881E6D651AEF741300352906 /* AppDelegate.m in Sources */,

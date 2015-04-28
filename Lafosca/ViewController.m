@@ -16,6 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.username.text = @"velo";
+    self.password.text = @"12345";
 }
 
 - (IBAction) signIn
@@ -30,19 +32,7 @@
     NSString *authValue = [NSString stringWithFormat:@"Basic %@", base64AuthData];
     [request setValue:authValue forHTTPHeaderField:@"Authorization"];
     [request setHTTPMethod:@"GET"];
-    
-    // Make URL request
-    NSHTTPURLResponse *response = nil;
-    NSError *error;
-    
-    // Get request and response though URL
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    // JSON Parsing
-    if (responseData) {
-    NSMutableArray *result = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
-    NSLog(@"Token = %@",result);
-    }
+    [self makeRequest:request];
 }
 
 - (IBAction) signUp
@@ -59,8 +49,11 @@
     [request setValue:authDataLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
-    // Make URL request
+    [self makeRequest:request];
+}
+
+- (void) makeRequest: (NSMutableURLRequest*) request
+{
     NSHTTPURLResponse *response = nil;
     NSError *error;
     
@@ -69,19 +62,18 @@
     
     // JSON Parsing
     NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
-    NSLog(@"Token = %@",[result objectForKey:@"authentication_token"]);
-    self.token = [result objectForKey:@"authentication_token"];
-    NSLog(@"Response code = %li", response.statusCode); //if 201, then it is ok
-    
-    // Give me beach state
- //   Beach *beach = [[Beach alloc] init];
-  //  [beach getBeachState];
+    [self grabToken:result];
 }
 
-- (void) setToken
+- (void) grabToken: (NSDictionary*) dict
 {
+    self.token=[dict objectForKey:@"authentication_token"];
+    NSLog(@"Token: %@", self.token);
     
+    Beach *beach = [[Beach alloc] initWithToken:self.token];
+    [beach getBeachState];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

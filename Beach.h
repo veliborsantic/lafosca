@@ -14,7 +14,9 @@
 @property (nonatomic, copy) NSNumber *happiness;
 @property (nonatomic, copy) NSNumber *dirtiness;
 @property (nonatomic, copy) NSString *temperature;
+@property (nonatomic, copy) NSString *token;
 
+- (id) initWithToken: (NSString*) tok;
 - (void) changeFlag;
 - (void) cleanTheBeach;
 - (void) searchForLostKids;

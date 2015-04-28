@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "Beach.h"
+#import "BeachTableViewController.h"
 
 @interface ViewController : UIViewController
 
