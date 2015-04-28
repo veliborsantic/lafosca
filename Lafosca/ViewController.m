@@ -16,44 +16,69 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
 
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://lafosca-beach.herokuapp.com/api/v1/users"]];
+- (IBAction) signIn
+{
+    // Prepare URL request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://lafosca-beach.herokuapp.com/api/v1/user"]];
     
-    NSString *authString = @"?username=velo&password=12345";
-    NSData *authData = [NSData dataWithBytes:[authString UTF8String] length:[authString length]];
-    NSString *authDataLength = [NSString stringWithFormat:@"%li", [authData length]];
-    [request setHTTPBody:authData];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:authDataLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    // Prepare what to send
+    NSString *authString = [NSString stringWithFormat:@"%@:%@", self.username.text, self.password.text];
+    NSData *authData = [authString dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *base64AuthData = [authData base64EncodedStringWithOptions:0];
+    NSString *authValue = [NSString stringWithFormat:@"Basic %@", base64AuthData];
+    [request setValue:authValue forHTTPHeaderField:@"Authorization"];
+    [request setHTTPMethod:@"GET"];
     
-    //-- Make URL request with server
+    // Make URL request
     NSHTTPURLResponse *response = nil;
     NSError *error;
     
-    //-- Get request and response though URL
+    // Get request and response though URL
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
-    //-- JSON Parsing
+    // JSON Parsing
+    if (responseData) {
     NSMutableArray *result = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
-    NSLog(@"Result = %@",result);
-    NSLog(@"Response code = %li", response.statusCode);
-    for (NSMutableDictionary *dic in result)
-    {
-        NSString *string = dic[@"array"];
-        if (string)
-        {
-            NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-            dic[@"array"] = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        }
-        else
-        {
-            NSLog(@"Error in url response");
-        }
-    }}
+    NSLog(@"Token = %@",result);
+    }
+}
 
-- (void) registerUser
+- (IBAction) signUp
+{
+    // Prepare URL request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://lafosca-beach.herokuapp.com/api/v1/users"]];
+    
+    // Prepare what to send
+    NSString *authString = [NSString stringWithFormat:@"{\"user\":{\"username\":\"%@\", \"password\": \"%@\"}}", self.username.text, self.password.text];
+    NSData *authData = [authString dataUsingEncoding:NSASCIIStringEncoding];
+    NSString *authDataLength = [NSString stringWithFormat:@"%lu", [authData length]];
+    [request setHTTPBody:authData];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:authDataLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    // Make URL request
+    NSHTTPURLResponse *response = nil;
+    NSError *error;
+    
+    // Get request and response though URL
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    // JSON Parsing
+    NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
+    NSLog(@"Token = %@",[result objectForKey:@"authentication_token"]);
+    self.token = [result objectForKey:@"authentication_token"];
+    NSLog(@"Response code = %li", response.statusCode); //if 201, then it is ok
+    
+    // Give me beach state
+ //   Beach *beach = [[Beach alloc] init];
+  //  [beach getBeachState];
+}
+
+- (void) setToken
 {
     
 }

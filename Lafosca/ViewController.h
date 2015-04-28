@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "Beach.h"
 
 @interface ViewController : UIViewController
 
+// UI
+@property (weak, nonatomic) IBOutlet UITextField *username;
+@property (weak, nonatomic) IBOutlet UITextField *password;
+
+
+@property (nonatomic, copy) NSString *token;
 
 @end
 
