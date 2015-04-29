@@ -7,16 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BeachTableViewController.h"
 
 @interface Beach : NSObject
 
-@property BOOL isOpen;
+@property BOOL state;
+@property (nonatomic, copy) NSNumber *flag;
 @property (nonatomic, copy) NSNumber *happiness;
 @property (nonatomic, copy) NSNumber *dirtiness;
 @property (nonatomic, copy) NSString *temperature;
 @property (nonatomic, copy) NSString *token;
+@property (nonatomic, strong) NSDictionary *kids;
 
 - (id) initWithToken: (NSString*) tok;
+- (void) sendAuthorizationWithRequest: (NSMutableURLRequest*) request andMethod: (NSString*) method;
 - (void) changeFlag;
 - (void) cleanTheBeach;
 - (void) searchForLostKids;

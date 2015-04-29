@@ -10,4 +10,6 @@
 
 @interface BeachTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) NSDictionary *beachData;
+
 @end
