@@ -19,7 +19,8 @@
 }
 
 - (void) changeFlag
-{}
+{
+}
 
 - (void) cleanTheBeach
 {
@@ -27,7 +28,8 @@
 }
 
 -(void) searchForLostKids
-{}
+{
+}
 
 
 

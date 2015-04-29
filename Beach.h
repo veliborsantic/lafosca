@@ -20,10 +20,8 @@
 @property (nonatomic, strong) NSDictionary *kids;
 
 - (id) initWithToken: (NSString*) tok;
-- (void) sendAuthorizationWithRequest: (NSMutableURLRequest*) request andMethod: (NSString*) method;
 - (void) changeFlag;
 - (void) cleanTheBeach;
 - (void) searchForLostKids;
-- (void) getBeachState;
 
 @end
