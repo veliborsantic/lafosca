@@ -119,6 +119,7 @@
     }
     else
     {
+        
         NSLog(@"The beach is closed :-)");
         beach.state = 0;
         beach.dirtiness = nil;
